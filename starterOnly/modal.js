@@ -27,3 +27,17 @@ function CloseModal() {
   modalbg.style.display = "none";
 }
 
+// Condition utilisation required //
+
+document.addEventListener('DOMContentLoaded', function () {
+  const checkbox1 = document.getElementById('checkbox1');
+  const form = document.forms['reserve'];
+
+  form.addEventListener('submit', function (event) {
+    if (!checkbox1.checked) {
+      alert("Veuillez lire et accepter les conditions d'utilisation.");
+      event.preventDefault(); // Empêche l'envoi du formulaire
+    }
+  });
+});
+
