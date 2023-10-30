@@ -63,17 +63,14 @@
               onsubmit="return validate();"
             >
               <div
-                class="formData">
+                class="formData ">
                 <label>Prénom</label><br>
                 <input
                   class="text-control"
                   type="text"
                   id="first"
                   name="first"
-                  required 
                   minlength="2"
-                  oninvalid="this.setCustomValidity('Veuillez indiquer votre Prénom')"
-                  oninput="this.setCustomValidity('')"
                 /><br>
               </div>
               <div
@@ -84,10 +81,6 @@
                   type="text"
                   id="last"
                   name="last"
-                  required 
-                  minlength="2"
-                  oninvalid="this.setCustomValidity('Veuillez indiquer votre Nom')"
-                  oninput="this.setCustomValidity('')"
                 /><br>
               </div>
               <div
@@ -98,11 +91,6 @@
                   type="email"
                   id="email"
                   name="email"
-                   pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
-                  required
-                  oninvalid="this.setCustomValidity('Veuillez indiquer votre E-mail')"
-                  oninput="this.setCustomValidity('')"
-
                 /><br>
               </div>
               <div
@@ -113,15 +101,12 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  required 
-                  oninvalid="this.setCustomValidity('Veuillez indiquer votre date de naissance')"
-                  oninput="this.setCustomValidity('')"
                 /><br>
               </div>
               <div
                 class="formData">
                 <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" required oninvalid="this.setCustomValidity('Veuillez indiquer le nombre de tournois auxquels vous avez participé')" oninput="this.setCustomValidity('')">
+                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
