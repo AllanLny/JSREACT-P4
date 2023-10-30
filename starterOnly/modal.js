@@ -34,37 +34,6 @@ window.onclick = function (event) {
   }
 }
 
-
-//     // Validation du bouton radio
-//     const location = document.getElementsByName('location');
-//     let isChecked = false;
-//     for (let i = 0; i < location.length; i++) {
-//       if (location[i].checked) {
-//         isChecked = true;
-//         break;
-//       }
-//     }
-//     if (!isChecked) {
-//       isValid = false;
-//       if (error) {
-//         form.removeChild(error);
-//       }
-//       error = document.createElement('p');
-//       error.classList.add('error-message');
-//       error.textContent = 'Veuillez sélectionner une ville.';
-//       form.insertBefore(error, form.firstChild);
-//     }
-
-//     return isValid;
-//   }
-
-//   form.addEventListener('submit', function (event) {
-//     if (!checkbox1.checked || !validate()) {
-//       event.preventDefault(); // Empêche l'envoi du formulaire
-//     }
-//   });
-// });
-
 function validate(event) {
   if (event) {
     event.preventDefault(); // Empêche le comportement par défaut de l'événement "submit"
@@ -148,9 +117,6 @@ function validate(event) {
     error = false;
   }
 
-  if (error = false) {
-    alert('Sheeesh');
-  }
 }
 
 
