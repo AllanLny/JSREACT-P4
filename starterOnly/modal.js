@@ -1,17 +1,11 @@
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
 // DOM Elements
 const modalbg = document.querySelector(".bground");
+const modalContent = document.querySelector(".content")
+const modalBody = document.querySelector(".modal-body")
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const CloseTrigger = document.querySelector(".close")
+
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -20,7 +14,7 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-// Close Modal //
+// Close Modal
 CloseTrigger.addEventListener("click", CloseModal);
 
 function CloseModal() {
@@ -30,97 +24,104 @@ function CloseModal() {
 window.onclick = function (event) {
   if (event.target == modalbg) {
     modalbg.style.display = "none";
-
   }
 }
 
 function validate(event) {
-  if (event) {
-    event.preventDefault(); // Empêche le comportement par défaut de l'événement "submit"
-  }
-  const first = document.forms["reserve"]["first"].value;
-  const last = document.forms["reserve"]["last"].value;
-  const email = document.forms["reserve"]["email"].value;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const birthdate = document.forms["reserve"]["birthdate"].value;
-  const quantity = document.forms["reserve"]["quantity"].value;
-  const location = document.forms["reserve"]["location"];
-  const radioCheck = Array.from(location).some(input => input.checked);
-  const checkbox = document.forms["reserve"]["checkbox1"].checked;
+  event.preventDefault(); // Prevent the default behavior of the "submit" event
 
-  var error = false;
+  const form = document.forms["reserve"];
+  const first = form["first"].value;
+  const last = form["last"].value;
+  const email = form["email"].value;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const birthdate = form["birthdate"].value;
+  const quantity = form["quantity"].value;
+  const location = form["location"];
+  const radioCheck = Array.from(location).some(input => input.checked);
+  const checkbox = form["checkbox1"].checked;
+  const txtValidation = document.querySelector('.validation-txt');
+  const btnValidation = document.querySelector('.btn-submit.validation');
+
+
+  let error = false;
 
   if (first.length < 2) {
-    document.getElementById("first").parentNode.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
-    document.getElementById("first").parentNode.setAttribute("data-error-visible", true);
+    form["first"].parentNode.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
+    form["first"].parentNode.setAttribute("data-error-visible", true);
     error = true;
   } else {
-    document.getElementById("first").parentNode.removeAttribute("data-error");
-    document.getElementById("first").parentNode.removeAttribute("data-error-visible", false);
-    error = false;
+    form["first"].parentNode.removeAttribute("data-error");
+    form["first"].parentNode.removeAttribute("data-error-visible");
   }
+
   if (last.length < 2) {
-    document.getElementById("last").parentNode.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
-    document.getElementById("last").parentNode.setAttribute("data-error-visible", true);
+    form["last"].parentNode.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
+    form["last"].parentNode.setAttribute("data-error-visible", true);
     error = true;
   } else {
-    document.getElementById("last").parentNode.removeAttribute("data-error");
-    document.getElementById("last").parentNode.removeAttribute("data-error-visible", false);
-    error = false;
+    form["last"].parentNode.removeAttribute("data-error");
+    form["last"].parentNode.removeAttribute("data-error-visible");
   }
+
   if (!emailRegex.test(email)) {
-    document.getElementById("email").parentNode.setAttribute("data-error", "Veuillez entrer une adresse e-mail valide");
-    document.getElementById("email").parentNode.setAttribute("data-error-visible", true);
+    form["email"].parentNode.setAttribute("data-error", "Veuillez entrer une adresse e-mail valide");
+    form["email"].parentNode.setAttribute("data-error-visible", true);
     error = true;
   } else {
-    document.getElementById("email").parentNode.removeAttribute("data-error");
-    document.getElementById("email").parentNode.removeAttribute("data-error-visible", false);
-    error = false;
+    form["email"].parentNode.removeAttribute("data-error");
+    form["email"].parentNode.removeAttribute("data-error-visible");
   }
+
   if (birthdate.length != 10) {
-    document.getElementById("birthdate").parentNode.setAttribute("data-error", "Veuillez entrer votre date de naissance");
-    document.getElementById("birthdate").parentNode.setAttribute("data-error-visible", true);
-    error = true;
-  }
-  else {
-    document.getElementById("birthdate").parentNode.removeAttribute("data-error");
-    document.getElementById("birthdate").parentNode.removeAttribute("data-error-visible", false);
-    error = false;
-  }
-  if (quantity.trim() === "") {
-    document.getElementById("quantity").parentNode.setAttribute("data-error", "Veuillez entrer le nombre de tournois GameOn auquel vous avez participé");
-    document.getElementById("quantity").parentNode.setAttribute("data-error-visible", true);
+    form["birthdate"].parentNode.setAttribute("data-error", "Veuillez entrer votre date de naissance");
+    form["birthdate"].parentNode.setAttribute("data-error-visible", true);
     error = true;
   } else {
-    document.getElementById("quantity").parentNode.removeAttribute("data-error");
-    document.getElementById("quantity").parentNode.removeAttribute("data-error-visible", false);
-    error = false;
+    form["birthdate"].parentNode.removeAttribute("data-error");
+    form["birthdate"].parentNode.removeAttribute("data-error-visible");
+  }
+
+  if (quantity.trim() === "") {
+    form["quantity"].parentNode.setAttribute("data-error", "Veuillez entrer le nombre de tournois GameOn auquel vous avez participé");
+    form["quantity"].parentNode.setAttribute("data-error-visible", true);
+    error = true;
+  } else {
+    form["quantity"].parentNode.removeAttribute("data-error");
+    form["quantity"].parentNode.removeAttribute("data-error-visible");
   }
 
   if (!radioCheck) {
-    document.getElementById("location1").parentNode.setAttribute("data-error", "Veuillez choisir une ville");
-    document.getElementById("location1").parentNode.setAttribute("data-error-visible", true);
+    form["location1"].parentNode.setAttribute("data-error", "Veuillez choisir une ville");
+    form["location1"].parentNode.setAttribute("data-error-visible", true);
     error = true;
   } else {
-    document.getElementById("location1").parentNode.removeAttribute("data-error");
-    document.getElementById("location1").parentNode.removeAttribute("data-error-visible", false);
-    error = false;
+    form["location1"].parentNode.removeAttribute("data-error");
+    form["location1"].parentNode.removeAttribute("data-error-visible");
   }
 
   if (!checkbox) {
-    document.getElementById("checkbox1").parentNode.setAttribute("data-error", "Veuillez acceptez les conditions d'utilisation.");
-    document.getElementById("checkbox1").parentNode.setAttribute("data-error-visible", true);
+    form["checkbox1"].parentNode.setAttribute("data-error", "Veuillez acceptez les conditions d'utilisation.");
+    form["checkbox1"].parentNode.setAttribute("data-error-visible", true);
     error = true;
   } else {
-    document.getElementById("checkbox1").parentNode.removeAttribute("data-error");
-    document.getElementById("checkbox1").parentNode.removeAttribute("data-error-visible", false);
-    error = false;
+    form["checkbox1"].parentNode.removeAttribute("data-error");
+    form["checkbox1"].parentNode.removeAttribute("data-error-visible");
   }
 
+  if (!error) {
+    form.style.display = "none";
+    txtValidation.style.display = 'block';
+    btnValidation.style.display = 'block';
+  }
+
+  btnValidation.addEventListener("click", function () {
+    form.submit();
+  });
 }
 
 
 const form = document.forms["reserve"];
 if (form) {
-  form.addEventListener("submit", validate); // Ajoute l'événement "submit" au formulaire
+  form.addEventListener("submit", validate);
 }

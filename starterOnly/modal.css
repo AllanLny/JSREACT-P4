@@ -26,6 +26,16 @@ p {
   padding: 0.5vw;
 }
 
+.validation-txt {
+  font-size: 36px;
+  margin-top: 270px;
+  margin-bottom: 270px;
+  text-align: center;
+  display: none;
+}
+.btn-submit.validation {
+  display: none;
+}
 img {
   padding-right: 1rem;
 }
