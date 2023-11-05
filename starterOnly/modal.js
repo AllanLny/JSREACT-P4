@@ -27,8 +27,9 @@ window.onclick = function (event) {
   }
 }
 
+// Fonction pour verifier chaque FormData et valider quand tout est bon 
 function validate(event) {
-  event.preventDefault(); // Prevent the default behavior of the "submit" event
+  event.preventDefault();
 
   const form = document.forms["reserve"];
   const first = form["first"].value;
@@ -45,7 +46,7 @@ function validate(event) {
 
 
   let error = false;
-
+  // Verification pour le prénom
   if (first.length < 2) {
     form["first"].parentNode.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
     form["first"].parentNode.setAttribute("data-error-visible", true);
@@ -54,7 +55,7 @@ function validate(event) {
     form["first"].parentNode.removeAttribute("data-error");
     form["first"].parentNode.removeAttribute("data-error-visible");
   }
-
+  // Verification pour le nom
   if (last.length < 2) {
     form["last"].parentNode.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
     form["last"].parentNode.setAttribute("data-error-visible", true);
@@ -63,7 +64,7 @@ function validate(event) {
     form["last"].parentNode.removeAttribute("data-error");
     form["last"].parentNode.removeAttribute("data-error-visible");
   }
-
+  // Verification de l'email
   if (!emailRegex.test(email)) {
     form["email"].parentNode.setAttribute("data-error", "Veuillez entrer une adresse e-mail valide");
     form["email"].parentNode.setAttribute("data-error-visible", true);
@@ -72,7 +73,7 @@ function validate(event) {
     form["email"].parentNode.removeAttribute("data-error");
     form["email"].parentNode.removeAttribute("data-error-visible");
   }
-
+  // Verification la date de naissance
   if (birthdate.length != 10) {
     form["birthdate"].parentNode.setAttribute("data-error", "Veuillez entrer votre date de naissance");
     form["birthdate"].parentNode.setAttribute("data-error-visible", true);
@@ -81,7 +82,7 @@ function validate(event) {
     form["birthdate"].parentNode.removeAttribute("data-error");
     form["birthdate"].parentNode.removeAttribute("data-error-visible");
   }
-
+  // Verification du nombre de tournois
   if (quantity.trim() === "") {
     form["quantity"].parentNode.setAttribute("data-error", "Veuillez entrer le nombre de tournois GameOn auquel vous avez participé");
     form["quantity"].parentNode.setAttribute("data-error-visible", true);
@@ -90,7 +91,7 @@ function validate(event) {
     form["quantity"].parentNode.removeAttribute("data-error");
     form["quantity"].parentNode.removeAttribute("data-error-visible");
   }
-
+  // Verification que l'un des radiobtn soit check 
   if (!radioCheck) {
     form["location1"].parentNode.setAttribute("data-error", "Veuillez choisir une ville");
     form["location1"].parentNode.setAttribute("data-error-visible", true);
@@ -100,6 +101,7 @@ function validate(event) {
     form["location1"].parentNode.removeAttribute("data-error-visible");
   }
 
+  // Verification que les conditions d'utilisation soit check 
   if (!checkbox) {
     form["checkbox1"].parentNode.setAttribute("data-error", "Veuillez acceptez les conditions d'utilisation.");
     form["checkbox1"].parentNode.setAttribute("data-error-visible", true);
@@ -108,13 +110,13 @@ function validate(event) {
     form["checkbox1"].parentNode.removeAttribute("data-error");
     form["checkbox1"].parentNode.removeAttribute("data-error-visible");
   }
-
+  // Si pas d'error afficher le menu de validation  
   if (!error) {
     form.style.display = "none";
     txtValidation.style.display = 'block';
     btnValidation.style.display = 'block';
   }
-
+  // Quand page fermer submit du formulaire   
   btnValidation.addEventListener("click", function () {
     form.submit();
   });
